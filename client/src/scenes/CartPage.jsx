@@ -1,7 +1,12 @@
 import SectionHeader from "../components/SectionHeader";
 import CartItemPreview from "../components/CartItemPreview";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 
 const CartPage = () => {
+
+    const newItems = useSelector((state) =>  state.shoppingCart);
+    console.log(newItems.length);
+    
 
     const items = [
         {
@@ -49,17 +54,20 @@ const CartPage = () => {
             </div>
             {items.map(item => (
                 <CartItemPreview imageLink={item.imageLink} quantity={item.quantity} brandName={item.brandName} itemName={item.itemName} price={item.price}/>
-            ))}
+            ))}            
             <div className="colorfull-divider"></div>
             <div className="grid lg:grid-cols-6 grid-cols-3 place-items-center my-3 cart-table-header">
                 <h5 className="lg:col-span-4 col-span-0 flex items-center justify-center"></h5>                
                 <h5 className="col-span-1 flex items-center justify-center underline">TOTAL</h5>
                 <h5 className="col-span-1 flex items-center justify-center underline">5.99$</h5>
             </div>
-            <div className="grid lg:grid-cols-6 grid-cols-3 my-3 cart-table-header">
+            <div className="grid lg:grid-cols-6 grid-cols-3 my-3 cart-table-header">                
                 <h5 className="col-span-5 flex items-center justify-center"></h5>                
                 <a href="#" className="ease-in-out hover:scale-110 transition-all font-medium item-cart-button lg:col-span-1 col-span-3 flex items-center justify-center mt-3 shadow-md">To Checkout</a>
             </div>
+            {newItems.map(item => (
+                <p>{item}</p>
+            ))}
         </div>
     )
 };

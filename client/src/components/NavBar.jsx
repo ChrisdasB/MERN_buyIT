@@ -1,17 +1,39 @@
 import { useState } from "react";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+
+// Import Link
+import { Link } from "react-router-dom";
+
+// Import navigation
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+    // Navigation
+    const navigate = useNavigate();
+    const shoppingCart = useSelector((state) => state.shoppingCart);
+    console.log(shoppingCart.length);
+
     // Hooks
     const [menuIsOpen, setMenuIsOpen] = useState(false);
 
+    const handleCategoryNavigation = (category, sectionHeader) => {
+        
+        navigate("/category", {
+            state: {
+                category: category,
+                sectionHeader: sectionHeader
+            }
+        });
+    }
+
 
     return(
-        <>
+        <>        
         <div className="card-header"></div>
-            <div name="big-nav-container" className="big-nav-container hidden lg:block border-b-2 border-gray-500">
+            <div name="big-nav-container" className="big-nav-container hidden lg:block shadow-md">
                 <div className="grid lg:grid-cols-6 grid-cols-1 bg-white">
             <div name="nav-logo-container" className="bg-black lg:col-span-1 m-2 col-span-6 h-20 lg:h-auto">
-                <img style={{height:"90px", width: "100%"}} src="./assets/images/BrandLogo.png"/>
+                <Link to="/"><img style={{height:"90px", width: "100%"}} src="./assets/images/BrandLogo.png"/></Link>
             </div>
             <div name="nav-mid-container" className="lg:col-span-4 col-span-6 grid grid-row-2">
                 
@@ -48,43 +70,57 @@ const NavBar = () => {
                 </div>
                 <div name="nav-mid-lower-container" className="row-span-1 grid grid-cols-11 justify-items-center lg:grid-rows-1">
                 <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
-                    <a href="#" className="
-                    text-center lg:text-right my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
-                    ">PC</a>
+                    <a 
+                        onClick={() => handleCategoryNavigation("pc", "PC's")} 
+                        className="
+                        text-center lg:text-right my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
+                        ">PC
+                    </a>
                     <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
-                    <a href="#" className="
-                    text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
-                    ">Laptops</a>
+                    <a
+                        onClick={() => handleCategoryNavigation("laptop", "Laptops")}
+                        className="
+                        text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
+                        ">Laptops
+                    </a>
                     <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
-                    <a href="#" className="
-                    text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
-                    ">Monitors</a>
+                    <a 
+                        onClick={() => handleCategoryNavigation("monitor", "Monitors")} 
+                        className="
+                        text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
+                        ">Monitors
+                    </a>
                     <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
-                    <a href="#" className="
-                    text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
-                    ">Peripherals</a>
+                    <a 
+                        onClick={() => handleCategoryNavigation("peripheral", "Peripherals")} 
+                        className="
+                        text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
+                        ">Peripherals
+                    </a>
                     <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
-                    <a href="#"className="
-                    text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
-                    ">Software</a>
+                    <a
+                        onClick={() => handleCategoryNavigation("software", "Software")} 
+                        className="
+                        text-center my-auto hover:transition-colors hover:duration-200 hover:scale-110 hover:text-purple-600 ease-in-out transition-all
+                        ">Software
+                    </a>
                     <img style={{height: "10px"}} className="my-auto mx-auto invisible xl:visible" src="./assets/icons/iconNavDot.png"></img>
                 </div>
                 
                 
             </div>
 
-            <div name="nav-right-container" className="lg:col-span-1 col-span-6 h-10 grid grid-cols-2 lg:h-auto">
-                <div className="flex justify-center items-center">                    
-                <a href="#">
-                    <img style={{height: "40px"}}  src="./assets/icons/iconCart.png"></img>
-                    
-                </a>
-                </div>
-                <div className="flex justify-center items-center">
-                    <a href="#" style={{ textDecoration: "none" }}>
-                    <img style={{height: "20px"}}  src="./assets/icons/iconLogout.png"></img>
-                    </a>
-                </div>
+            <div name="nav-right-container" className="lg:col-span-1 col-span-6 h-10 grid grid-cols-2 lg:h-auto justify-self-start">
+                <div className="grid grid-cols-2 place-content-end mb-2 place-items-center ">                    
+                <Link to="/cart"><a href="#">
+                    <img className="hover:bg-purple-200" style={{height: "40px"}}  src="./assets/icons/iconCart.png"></img>
+                    </a></Link>
+                    {shoppingCart.length > 0 ?
+                        <h1 className="text-red-500 text-lg font-bold animate-pulse self-center justify-self-start">{shoppingCart.length}</h1>
+                        : undefined
+                    }
+                
+                </div>               
 
             </div>
             </div>
@@ -95,7 +131,7 @@ const NavBar = () => {
 
 
 
-                    <a href="#" className="col-span-3 flex justify-center items-center" onClick={() => setMenuIsOpen(!menuIsOpen)} style={{ textDecoration: "none" }}>
+                    <a className="col-span-3 flex justify-center items-center" onClick={() => setMenuIsOpen(!menuIsOpen)} style={{ textDecoration: "none" }}>
                         {menuIsOpen ? 
                         <img style={{height: "40px", width: "50px"}} src="./assets/icons/iconMenuOpen.png"></img>  
                         :
@@ -108,13 +144,13 @@ const NavBar = () => {
 
                         
                     <div name="nav-logo-container" className="flex items-center justify-center col-span-2 h-10">
-                    <img style={{height:"40px", width: "auto"}} src="./assets/images/BrandLogo.png"/>
+                    <Link to="/"><img style={{height:"40px", width: "auto"}} src="./assets/images/BrandLogo.png"/></Link>
                     </div>
                     <div className="col-span-3 text-center">
                     <div className="flex justify-center items-center">
-                <a href="#" style={{ textDecoration: "none"}}>
-                    <img style={{height: "40px"}} src="./assets/icons/iconCart.png"></img>
-                </a>
+                <a style={{ textDecoration: "none"}}>
+                <Link to="/cart"><img style={{height: "40px"}} src="./assets/icons/iconCart.png"></img></Link>                
+                </a>                
                 </div>
                     </div>
                 </div>
@@ -133,16 +169,14 @@ const NavBar = () => {
                             </div>
                         </form>
                         <div className="border-t my-2 border-gray-500"></div>
-                        <a href="#" className="text-left text-lg my-auto">PC's</a>
-                        <a href="#" className="text-left text-lg my-auto">Laptops</a>
-                        <a href="#" className="text-left text-lg my-auto">Monitor</a>
-                        <a href="#" className="text-left text-lg my-auto">Peripherals</a>
-                        <a href="#" className="text-left text-lg my-auto">Software</a>
+                        <a onClick={() => handleCategoryNavigation("pc", "PC's")} className="text-left text-lg my-auto">PC's</a>
+                        <a onClick={() => handleCategoryNavigation("laptop", "Laptops")} className="text-left text-lg my-auto">Laptops</a>
+                        <a onClick={() => handleCategoryNavigation("monitor", "Monitors")} className="text-left text-lg my-auto">Monitors</a>
+                        <a onClick={() => handleCategoryNavigation("peripheral", "Peripherals")} className="text-left text-lg my-auto">Peripherals</a>
+                        <a onClick={() => handleCategoryNavigation("software", "Software")} className="text-left text-lg my-auto">Software</a>
                         <div className="border-t my-2 border-gray-500"></div>
                         <div className="flex justify-start items-center mb-3">
-                    <a href="#" style={{ textDecoration: "none" }}>
-                    <img style={{height: "20px"}} src="./assets/icons/iconLogout.png"></img>
-                    </a>
+                    
                 </div>
                     </div>
                     : undefined }

@@ -1,8 +1,12 @@
 import NavBar from "../components/NavBar";
 import ItemPreview from "../components/ItemPreview";
 import SectionHeader from "../components/SectionHeader";
+import { useLocation } from "react-router-dom";
 
 const CategoryPage= () => {
+    // Init location
+    const location = useLocation();
+
 
     const items = [
         {
@@ -63,8 +67,8 @@ const CategoryPage= () => {
       ]
 
     return(
-        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">
-        <SectionHeader name={"*Category*"}/>
+        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white shadow-md">
+        <SectionHeader name={location.state.sectionHeader}/>
         <div className="grid place-content-around">
             <h1 className="text-center text-lg">Sort by:</h1>
             <div className="flex">

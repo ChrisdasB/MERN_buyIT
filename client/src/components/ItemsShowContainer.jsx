@@ -122,6 +122,8 @@ const ItemsShowContainer =  () => {
                 price: "599,99"},
     ]
 
+    var key = 0;
+
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1400 },
@@ -153,7 +155,7 @@ const ItemsShowContainer =  () => {
 
             <Carousel showDots={true} responsive={responsive}>
             {items.map(item => (
-            <ItemPreview imageLink={item.imageLink} brandName={item.brandName} itemName={item.itemName} price={item.price}/>
+            <ItemPreview imageLink={item.imageLink} brandName={item.brandName} itemName={item.itemName} price={item.price} key={key++}/>
         ))}
             </Carousel>
 

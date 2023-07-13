@@ -1,7 +1,27 @@
-const ItemPreview = ({imageLink, brandName, itemName, price}) => {
+// Import navigation
+import { useNavigate } from "react-router-dom";
+
+const ItemPreview = ({imageLink, brandName, itemName, price, myKey}) => {
+    // Setup navigate
+    const navigate = useNavigate();
+
+    // Functions
+    const handleItemNavigation = () => {
+        navigate("/item", {
+            state: {
+                imageLink,
+                brandName,
+                itemName,
+                price
+            }
+        }
+        )
+
+    }
+
     return(
         <>
-        <a href="#" name="item-preview" className="item-preview grid grid-rows-8 lg:mx-6 mx-20 my-10 transition-all">
+        <a key={myKey} onClick={() => handleItemNavigation()} name="item-preview" className="item-preview grid grid-rows-8 lg:mx-6 mx-20 my-10 transition-all">
 
             <div name="item-preview-img" style={{width:"100%"}} className="  text-white row-span-4 flex items-center justify-center">
                 <img style={{width:"100%", height:"120px", objectFit:"cover"}} src={imageLink}/>

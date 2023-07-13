@@ -48,6 +48,10 @@ body {
   color: rgb(47, 47, 47); 
 }
 
+.big-nav-container a:hover {
+  cursor: pointer;
+}
+
 
 
 .small-nav-container a {

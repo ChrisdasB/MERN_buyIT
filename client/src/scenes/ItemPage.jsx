@@ -1,6 +1,20 @@
-import NavBar from "../components/NavBar";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addShoppingCart } from "../state";
 
 const ItemPage = () => {
+    // Init Location
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+    // Functions
+    const handleAddToCart = () => {
+        console.log("Dispatching brandname: " + location.state.brandName);
+        dispatch(addShoppingCart({item: location.state.brandName}
+            )
+            )
+    }
+
     return(
         <>
         
@@ -11,12 +25,12 @@ const ItemPage = () => {
 
             <div className="col-span-1 row-span-2 lg:p-5 p-0 grid grid-rows-2  shadow-none lg:shadow-md">        
                 <div name="item-page-name" className="col-span-1  lg:p-5 p-0 grid">
-                    <h5 className="item-brand-text">Brand Name</h5>
+                    <h5 className="item-brand-text">{location.state.brandName}</h5>
                     <div className="colorfull-divider"></div>
-                    <h5 className="item-name-text">Item Name</h5>
+                    <h5 className="item-name-text">{location.state.itemName}</h5>
                 </div>
                 <div name="item-page-price" className="p-5 grid place-items-end">
-                <h5 className="item-price-text">499,99$</h5>
+                <h5 className="item-price-text">{location.state.price}</h5>
                     <h5 className="text-sm">incl. 14% VAT</h5>
                     <h5>Stock: &#62; 10</h5>
                 </div>
@@ -29,7 +43,7 @@ const ItemPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-end">
-                        <a className="item-cart-button">Add to cart</a>
+                        <a onClick={handleAddToCart} className="item-cart-button">Add to cart</a>
                     </div>
                     
                 </div>
