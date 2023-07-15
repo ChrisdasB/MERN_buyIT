@@ -3,37 +3,67 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     recentlyViewed: [],
+    shopItems:[],
     shoppingCart: [],
     currentItem: {},
     checkoutCart: [],
-    checkoutAmount: 0.0
+    checkoutAmount: 0.0,
+    showItemRemoved: false
 }
 
 export const visitorSlice =  createSlice({
     name: "visitor",
     initialState,
     reducers: {
+        setShowItemRemoved: (state, action) => {
+            console.log("Showing message!");
+            state.showItemRemoved = action.payload.value;            
+        },
         addRecentlyViewed: (state, action) => {
             state.recentlyViewed += action.payload.recentlyViewed;
         },
         addShoppingCart: (state, action) => {
+
+            for(var i = 0; i < state.shoppingCart.length; i++)
+            {
+                if(state.shoppingCart[i]["id"] === action.payload.item["id"])
+                {
+                    state.shoppingCart[i]["quantity"] += action.payload.item["quantity"];
+                    return;
+                }
+            }
+
             state.shoppingCart.push(action.payload.item);
         },
         removeShoppingCart: (state, action) => {
-            state.shoppingCart -= action.payload.item;
+            console.log("REmoving here also!");
+            var tempCart = [...state.shoppingCart];
+            for(var i = 0; i < state.shoppingCart.length; i++)
+            {                
+                if(state.shoppingCart[i]["_id"] === action.payload.id)
+                {
+                    tempCart.pop(state.shoppingCart[i]["_id"]);
+                    console.log(tempCart);
+                    state.shoppingCart = tempCart;
+                    return;
+                }
+            }
         },
         setCurrentItem: (state, action) => {
-            state.currentItem = action.payload.item;
+            state.currentItem = action.payload.item;            
         },
         setCheckoutCart: (state, action) => {
             state.checkoutCart = action.payload.cart;
         },
         setCheckoutAmount: (state, action) => {
-            state.checkoutAmount = action.payload.amount
+            state.checkoutAmount = action.payload.amount;
+        },
+        setShopItems: (state, action) => {
+            state.shopItems = action.payload.items;
         }
 
     }
 })
 
-export const {addRecentlyViewed, addShoppingCart, removeShoppingCart, setCurrentItem, setCheckoutCart, setCheckoutAmount} = visitorSlice.actions;
+export const {setShowItemRemoved, addRecentlyViewed, addShoppingCart, removeShoppingCart, setCurrentItem, setCheckoutCart, setCheckoutAmount, setShopItems} = visitorSlice.actions;
 export default visitorSlice.reducer;

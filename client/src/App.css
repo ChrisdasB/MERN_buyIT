@@ -3,7 +3,7 @@
 html {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #f9f1ff;
+  background-color: #ffffff;
   font-family: "Roboto", sans-serif;
 }
 
@@ -19,6 +19,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  cursor: pointer;
+}
+
 /* GENERAL */
 .color-clickable {
   color: #193fff;
@@ -28,7 +32,7 @@ body {
 /* COMPONENT STYLING */
 .card-header {
   height: 10px;
-  background: linear-gradient(135deg, #ff4848 0%, #ea00ff 100%);
+  background: linear-gradient(135deg, #ff1100 0%, #8021218f 100%);
 }
 
 .colorfull-divider {
@@ -52,7 +56,10 @@ body {
   cursor: pointer;
 }
 
-
+.shopping-cart-number {
+  font-size: xx-large;
+  font-weight: 700;
+}
 
 .small-nav-container a {
   font-size: large;
@@ -146,6 +153,16 @@ border-color: #757575;
   box-shadow: 1px 0px 17px -10px rgba(0,0,0,0.75);
 }
 
+.cart-added-message {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  height: 5%;
+  left: 0%;
+  font-size: x-large;
+  font-weight: 700;
+}
+
 /* CHECKOUT PAGE STYLING */
 .checkout-page input {  
   border-top: none; 
@@ -171,4 +188,19 @@ border-color: #757575;
 .checkout-total-amount {
   font-weight: 600;
   color: #ff2084;
+}
+
+/* ANIMATIONS */
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-in-out;
 }

@@ -7,8 +7,6 @@ const SectionHeader = ({name}) => {
             </div>
             <div className="colorfull-divider col-span-2"></div>
         </div>
-
-        
         </>
     )
 }

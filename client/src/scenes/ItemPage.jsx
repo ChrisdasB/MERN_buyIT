@@ -1,26 +1,56 @@
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addShoppingCart } from "../state";
+import { useEffect, useState } from "react";
 
 const ItemPage = () => {
+    // Hooks
+    const[showCartAddedMessage, setShowCardAddedMessage] = useState(false);
+    const[quantity, setQuantity] = useState(1);
+
     // Init Location
     const location = useLocation();
     const dispatch = useDispatch();
 
     // Functions
+
+    // Add item to cart, show message, hide message after 3 seconds
     const handleAddToCart = () => {
-        console.log("Dispatching brandname: " + location.state.brandName);
-        dispatch(addShoppingCart({item: location.state.brandName}
-            )
-            )
+        dispatch(addShoppingCart({item: {
+            id: location.state._id,
+            quantity: quantity
+        }        
+        }));
+        setShowCardAddedMessage(true);
+        setTimeout(() => {
+            setShowCardAddedMessage(false);
+          }, "3000");
     }
+
+    // Increase Quantity
+    const handleIncreaseQuantity = () => {
+        setQuantity(quantity + 1);
+    }
+
+    const handleDecreaseQuantity = () => {
+        if(quantity == 1)
+        {
+            return;
+        }
+        setQuantity(quantity - 1);
+    }
+
+    // Scroll to top of page
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     return(
         <>
         
-        <div className="mt-10 grid lg:grid-cols-2 lg:grid-rows-3 grid-rows-2 lg:p-10 p-5 gap-5 bg-white shadow-none lg:shadow-md">
+        <div className="mt-10 grid lg:grid-cols-2 lg:grid-rows-3 grid-rows-2 lg:p-10 p-5 gap-5 bg-white shadow-none">
             <div style={{objectFit:"cover"}} name="item-page-image" className="col-span-1 row-span-2 flex items-center justify-center">
-                <img className="shadow-md" src="./assets/images/TestImage.jpeg"></img>
+                <img className="shadow-md p-5" src={location.state.imageLink}></img>
             </div>   
 
             <div className="col-span-1 row-span-2 lg:p-5 p-0 grid grid-rows-2  shadow-none lg:shadow-md">        
@@ -30,16 +60,16 @@ const ItemPage = () => {
                     <h5 className="item-name-text">{location.state.itemName}</h5>
                 </div>
                 <div name="item-page-price" className="p-5 grid place-items-end">
-                <h5 className="item-price-text">{location.state.price}</h5>
+                <h5 className="item-price-text"><small>$</small> {location.state.price}</h5>
                     <h5 className="text-sm">incl. 14% VAT</h5>
                     <h5>Stock: &#62; 10</h5>
                 </div>
                 <div name="item-page-quantity" className=" grid px-5 lg:grid-cols-2 grid-rows-2">
                     <div className="item-page-quantity flex justify-center align-middle">
                         <div className="flex items-center">
-                            <a href="#"><img  src="./assets/icons/iconMinus.png"/></a>
-                            <input style={{textAlign:"center"}} placeholder="1" className="shadow-inner m-4 w-14 align-center"></input>
-                            <a href="#"><img  src="./assets/icons/iconPlus.png"/></a>
+                            <a onClick={handleDecreaseQuantity}><img  src="./assets/icons/iconMinus.png"/></a>
+                            <input style={{textAlign:"center"}} value={quantity} className="shadow-inner m-4 w-14 align-center"></input>
+                            <a onClick={handleIncreaseQuantity}><img  src="./assets/icons/iconPlus.png"/></a>
                         </div>
                     </div>
                     <div className="flex items-center justify-end">
@@ -52,12 +82,31 @@ const ItemPage = () => {
 
             <div name="item-page-description" className="lg:col-span-2 lg:row-span-1 lg:p-10 p-0">
             <div className="colorfull-divider"></div>
-                <h5 className="description-header-text mt-2">This is a random description!</h5>     
-                <h5 className="description-text mt-5">This is random description! Long as text here! This has to tell everything about the product in some sentences. Noone knows, how long this might be! This is random description! Long as text here! This has to tell everything about the product in some sentences. Noone knows, how long this might be! This is random description! Long as text here! This has to tell everything about the product in some sentences. Noone knows, how long this might be!</h5> 
-                      
+                <h5 className="description-header-text mt-2">{location.state.descriptionHeader}</h5>     
+                <h5 className="description-text mt-5">{location.state.description}</h5>                       
             </div>
+            <div name="item-page-specs" className="lg:col-span-2 lg:row-span-1 lg:p-10 p-0">
+            <div className="colorfull-divider"></div>
+            <h5 className="description-header-text mt-2 mb-5 underline">Specifications:</h5>
+                {Object.keys(location.state.specs).map( (keyName, i) => (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 lg:mb-4 mb-1 border-b-2">
+                        <h5 className="font-bold">{keyName}:</h5>
+                        <h5>{location.state.specs[keyName]}</h5>
+                    </div>
+                ))}        
+                {showCartAddedMessage ? 
+                <div  
+                    className="bg-green-300 cart-added-message fade-in" 
+                    name="cart-added-message">
+                    <h1 className="text-center">"{location.state.itemName}" has been added to your Cart</h1>
+                </div> 
+                : undefined
+                }             
+            </div>
+            
 
         </div>
+        
         </>
     )
 }

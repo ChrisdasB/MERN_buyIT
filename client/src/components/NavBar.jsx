@@ -116,7 +116,7 @@ const NavBar = () => {
                     <img className="hover:bg-purple-200" style={{height: "40px"}}  src="./assets/icons/iconCart.png"></img>
                     </a></Link>
                     {shoppingCart.length > 0 ?
-                        <h1 className="text-red-500 text-lg font-bold animate-pulse self-center justify-self-start">{shoppingCart.length}</h1>
+                        <h1 className="text-red-500 shopping-cart-number self-center justify-self-start">{shoppingCart.length}</h1>
                         : undefined
                     }
                 

@@ -1,0 +1,42 @@
+import Items from "../models/Item.js";
+import mongoose from "mongoose";
+
+export const getAllItems = async (req,res) => {
+    console.log("Getting Backend items!");
+    try
+    {
+    const response = await Items.find();
+    
+    res.status(200).json(response);
+    } 
+
+    catch(err) 
+    {
+        res.status(404).json({message: err.message});
+    }
+    
+}
+
+export const getCartItems = async (req,res) => {
+    try
+    {
+        const{currentCart} = req.body;
+        console.log(currentCart);
+        var response = [];
+        for( var i = 0; i < currentCart.length; i++)
+        {
+            var currentResponse = await Items.findOne({_id: currentCart[i]["id"]});
+            currentResponse.quantity = currentCart[i]["quantity"];
+            console.log(currentResponse["quantity"]);
+            response.push(currentResponse);
+            
+        }
+        console.log(response[0]["quantity"]);
+        res.status(200).json({updatedItems: response});
+    } 
+
+    catch (err)
+     {
+        res.status(404).json({message: err.message});        
+    }
+}
