@@ -42,18 +42,16 @@ const CartPage = () => {
 
         const response = await fetch(process.env.REACT_APP_SERVER_ROUTE + "items/cart", {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json", key: process.env.REACT_APP_API_KEY},
             body: JSON.stringify({currentCart: currentCart})
         }); 
 
-        var {updatedItems} = await response.json();
-        
+        var {updatedItems, totalPrice} = await response.json();
+        console.log("Quantitys from server: " + updatedItems[0]["price"]);
 
         // Add quantitys
         for(var i = 0; i < updatedItems.length; i++)
         {
-            
-
             for(var ii  = 0; ii < currentCart.length; ii++)
             {
                 if(updatedItems[i]["_id"] == currentCart[ii]["id"])
@@ -63,18 +61,8 @@ const CartPage = () => {
             }
         }
 
-        var tempTotalPrice = 0;
-    
-        for(var i = 0; i < updatedItems.length; i++)
-        {
-            tempTotalPrice += (updatedItems[i]["price"] * updatedItems[i]["quantity"]);
-        }
-        
-
-        console.log(updatedItems);
-
         setUpdatedCartItems(updatedItems);
-        setTotalPrice(tempTotalPrice.toFixed(2));
+        setTotalPrice(totalPrice.toFixed(2));
     }
 
     useEffect(() => {        

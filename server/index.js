@@ -7,7 +7,7 @@ import helmet from "helmet";
 import Items from "./models/Item.js";
 import initItems from "./INITDATA.js";
 import { getAllItems, getCartItems } from "./controllers/items.js";
-import { validateReferer } from "./middelware/accessAuth.js";
+import { validateApiKey} from "./middelware/accessAuth.js"
 
 
 // Config
@@ -20,14 +20,16 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
+// Stripe
+
 // Routes
-app.get('/',  (req, res) => {
+app.get('/', validateApiKey,  (req, res) => {
     console.log("Ja Moin!");
     res.status(200).json({message: "Hello World!"});
   });
 
-app.get('/items/all', getAllItems);
-app.post('/items/cart', getCartItems);
+app.get('/items/all', validateApiKey, getAllItems);
+app.post('/items/cart', validateApiKey, getCartItems);
 
 
 // DB POPULATING

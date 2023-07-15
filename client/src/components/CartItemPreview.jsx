@@ -46,11 +46,11 @@ const CartItemPreview = ({handleRemoveShoppingCart, imageLink, quantity, brandNa
             </div>
             <div className="h-20 col-span-1 grid place-content-center place-items-center">
             <small className="lg:invisible lg:h-0 visible h-auto">per Piece</small>
-            <h1>{price} $</h1>
+            <h1>{price.toFixed(2)} $</h1>
             </div>
             <div className="h-20 col-span-1 grid place-content-center place-items-center">
             <small className="lg:invisible lg:h-0 visible h-auto">Price</small>    
-            <h1>{+price * +quantity} $</h1>
+            <h1>{(+price * +quantity).toFixed(2)} $</h1>
             </div>
            
         </div>

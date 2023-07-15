@@ -35,8 +35,12 @@ const HomePage = () => {
     const dispatch = useDispatch();    
 
     const GetAllItems = async () => {
-        console.log(process.env.REACT_APP_SERVER_ROUTE);
-        const response = await fetch(process.env.REACT_APP_SERVER_ROUTE +  "items/all");
+        const response = await fetch(process.env.REACT_APP_SERVER_ROUTE +  "items/all",
+        {
+            method: "GET",
+            headers: {key: process.env.REACT_APP_API_KEY}
+        }
+        );
 
         const allItems = await response.json();
         dispatch(setShopItems({items: allItems}));
