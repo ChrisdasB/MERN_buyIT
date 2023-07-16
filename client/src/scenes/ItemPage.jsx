@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addShoppingCart } from "../state";
 import { useEffect, useState } from "react";
@@ -11,6 +11,8 @@ const ItemPage = () => {
     // Init Location
     const location = useLocation();
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     // Functions
 
@@ -40,10 +42,21 @@ const ItemPage = () => {
         setQuantity(quantity - 1);
     }
 
+    const startRedirect = () => {
+        setTimeout(() => {
+            navigate("/")
+          }, "3000");
+    }
+
     // Scroll to top of page
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
+      }, []);
+
+    if(location.state != null)
+    {
+
+    
 
     return(
         <>
@@ -110,5 +123,16 @@ const ItemPage = () => {
         </>
     )
 }
+else {
+    return(
+        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">
+            <h1 className="text-lg font-bold">Something went wrong ...</h1>
+            <h1>We are redirecting to the homepage.</h1>
+            {startRedirect()}
+        </div>
+    )
+}
+}
+
 
 export default ItemPage;
