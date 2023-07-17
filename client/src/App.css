@@ -190,6 +190,12 @@ border-color: #757575;
   color: #ff2084;
 }
 
+/* SUCCESS PAGE STYLE */
+.success-header-text {
+  font-size: x-large;
+  font-weight: 500;
+}
+
 /* ANIMATIONS */
 
 @keyframes fade-in {

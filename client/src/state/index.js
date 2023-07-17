@@ -49,6 +49,9 @@ export const visitorSlice =  createSlice({
                 }
             }
         },
+        resetShoppingCart: (state, action) => {
+            state.shoppingCart = [];
+        },
         setCurrentItem: (state, action) => {
             state.currentItem = action.payload.item;            
         },
@@ -65,5 +68,5 @@ export const visitorSlice =  createSlice({
     }
 })
 
-export const {setShowItemRemoved, addRecentlyViewed, addShoppingCart, removeShoppingCart, setCurrentItem, setCheckoutCart, setCheckoutAmount, setShopItems} = visitorSlice.actions;
+export const {resetShoppingCart, setShowItemRemoved, addRecentlyViewed, addShoppingCart, removeShoppingCart, setCurrentItem, setCheckoutCart, setCheckoutAmount, setShopItems} = visitorSlice.actions;
 export default visitorSlice.reducer;

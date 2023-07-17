@@ -7,7 +7,8 @@ import helmet from "helmet";
 import Items from "./models/Item.js";
 import initItems from "./INITDATA.js";
 import { getAllItems, getCartItems } from "./controllers/items.js";
-import { validateApiKey} from "./middelware/accessAuth.js"
+import { validateApiKey} from "./middelware/accessAuth.js";
+import {Stripe} from 'stripe';
 
 
 // Config
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
 // Stripe
+const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
 // Routes
 app.get('/', validateApiKey,  (req, res) => {
@@ -30,6 +32,70 @@ app.get('/', validateApiKey,  (req, res) => {
 
 app.get('/items/all', validateApiKey, getAllItems);
 app.post('/items/cart', validateApiKey, getCartItems);
+app.post('/create-checkout-session', validateApiKey, async (req, res)  => {
+    try 
+    {
+
+    
+
+    // Get Data from request body
+    const {items} = req.body;
+    if(items.length < 1)
+    {
+        res.status(400).json({message: "No items transfered!"});
+    }
+
+    // Update data from database
+    var response = [];
+    for( var i = 0; i < items.length; i++)
+        {
+            const currentResponse = await Items.findOne({_id: items[i]["_id"]});     
+            response.push(currentResponse);            
+        }
+        //console.log(response);
+
+    // Add Quantitiys
+    for(var i = 0; i < response.length; i++)
+        {
+            for(var ii  = 0; ii < items.length; ii++)
+            {
+                if(response[i]["_id"] == items[ii]["_id"])
+                {
+                    response[i].quantity = items[ii]["quantity"];
+                }
+            }
+        }
+
+    if(response.length < 1)
+    {
+        res.status(404).json({message: "Could not find items ..."});
+    }
+    
+    // Create session
+    const session = await stripe.checkout.sessions.create({
+        line_items: response.map(item => {  
+        return{
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: item.brandName + " - " + item.itemName
+                },
+                unit_amount: (item.price *100),                
+            },
+            quantity: item.quantity
+        }       
+        }),
+        payment_method_types: ['card'],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cart'
+    })
+
+    res.status(200).json({session});
+    } catch (err) {
+        res.status(500).json({message: "We are sorry. Something went wrong :(. Please try again later!"});
+    }
+})
 
 
 // DB POPULATING

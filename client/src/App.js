@@ -3,7 +3,7 @@ import HomePage from './scenes/HomePage';
 import ItemPage from './scenes/ItemPage';
 import CategoryPage from './scenes/CategoryPage';
 import CartPage from './scenes/CartPage';
-import CheckOut from './scenes/CheckOut';
+import SuccessPage from './scenes/SuccessPage';
 
 // Import Components
 import NavBar from './components/NavBar';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/category" element={<CategoryPage />} /> 
           <Route path="/item" element={<ItemPage />} /> 
           <Route path="/cart" element={<CartPage />} /> 
-          <Route path="/checkout" element={<CheckOut />} /> 
+          <Route path="/success" element={<SuccessPage />} /> 
         </Routes>
         <Footer/>
       </div>

@@ -2,29 +2,60 @@ import SectionHeader from "../components/SectionHeader";
 import CartItemPreview from "../components/CartItemPreview";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { setShowItemRemoved } from "../state";
 import { useDispatch } from "react-redux";
 import { removeShoppingCart } from "../state";
+import CheckOut from "../components/CheckOut";
 
 const CartPage = () => {
-
     // Get data from store
     const currentCart = useSelector((state) =>  state.shoppingCart);
     const showItemRemoved = useSelector((state) => state.showItemRemoved);
+
+    // Hooks
     const [updatedCartItems, setUpdatedCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [showCheckout, setShowCheckout] = useState(false);
     const [seed, setSeed] = useState(1);
+    const checkoutSection = useRef(null);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleShowCheckout = (elementRef) => {
+        setShowCheckout(true);
+        setTimeout(() => {
+            elementRef.current?.scrollIntoView({behavior: 'smooth'})
+          }, "100");
+        
+    }
 
     function handleRemoveShoppingCart(_id) {
         console.log("Removing");
         dispatch(setShowItemRemoved({value: true}));
         dispatch(removeShoppingCart({id: _id}));
-        window.location.reload(false);    
-             
+        window.location.reload(false);                 
+    }
+
+    const handleCheckout = async () => {
+
+        const response = await fetch(process.env.REACT_APP_SERVER_ROUTE + 'create-checkout-session', {
+            method:'POST',
+            headers: {
+                key: process.env.REACT_APP_API_KEY,
+                'Content-Type': 'application/json'                
+            },
+            body: JSON.stringify({
+                items: updatedCartItems
+            })
+        }) 
+
+        const stripeResponse = await response.json();
+        const {session} = stripeResponse;
+        const {url} = session;
+        console.log(url);
+        window.location = url;
     }
     
     if(showItemRemoved)
@@ -125,7 +156,17 @@ const CartPage = () => {
             </div>
             <div key={seed}>
             {updatedCartItems.map(item => (
-                <CartItemPreview imageLink={item.imageLink} quantity={item.quantity} brandName={item.brandName} itemName={item.itemName} price={item.price} description={item.description} descriptionHeader={item.descriptionHeader} specs={item.specs} id={item._id} handleRemoveShoppingCart={handleRemoveShoppingCart}/>
+                <CartItemPreview 
+                imageLink={item.imageLink}
+                 quantity={item.quantity}
+                  brandName={item.brandName}
+                   itemName={item.itemName}
+                    price={item.price}
+                     description={item.description}
+                      descriptionHeader={item.descriptionHeader}
+                       specs={item.specs} id={item._id}
+                        handleRemoveShoppingCart={handleRemoveShoppingCart}                        
+                        />
             ))}   
             </div>         
             <div className="colorfull-divider"></div>
@@ -134,10 +175,15 @@ const CartPage = () => {
                 <h5 className="col-span-1 flex items-center justify-center underline">TOTAL</h5>
                 <h5 className="col-span-1 flex items-center justify-center underline">{totalPrice} $</h5>
             </div>
-            <div className="grid lg:grid-cols-6 grid-cols-3 my-3 cart-table-header">                
-                <h5 className="col-span-5 flex items-center justify-center"></h5>                
-                <a onClick={() => navigate("/checkout")} className="ease-in-out hover:scale-110 transition-all font-medium item-cart-button lg:col-span-1 col-span-3 flex items-center justify-center mt-3 shadow-md">To Checkout</a>
+            {!showCheckout ? 
+                <div className="grid place-content-center">               
+                <a onClick={() => handleShowCheckout(checkoutSection)} style={{minWidth:"300px", minHeight:"40px"}} className="ease-in-out hover:scale-110 transition-all font-medium item-cart-button mt-3 shadow-md">To Checkout</a>
             </div>
+            :
+                undefined
+            }
+            
+            
             {showItemRemoved ? 
                 <div  
                     className="bg-green-300 cart-added-message fade-in" 
@@ -146,6 +192,14 @@ const CartPage = () => {
                 </div> 
                 : undefined
                 }         
+            <div ref={checkoutSection}>
+            {showCheckout ?
+            
+           <CheckOut handleCheckout={handleCheckout}/>
+            :
+             undefined}
+             
+             </div> 
             
         </div>
     }
