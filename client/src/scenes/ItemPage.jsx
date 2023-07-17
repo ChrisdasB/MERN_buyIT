@@ -18,6 +18,11 @@ const ItemPage = () => {
 
     // Add item to cart, show message, hide message after 3 seconds
     const handleAddToCart = () => {
+        if(location.state._id == null || location.state._id.length < 1)
+        {
+            console.log("Id could not be found!");
+            return;
+        }
         dispatch(addShoppingCart({item: {
             id: location.state._id,
             quantity: quantity
@@ -75,7 +80,6 @@ const ItemPage = () => {
                 <div name="item-page-price" className="p-5 grid place-items-end">
                 <h5 className="item-price-text"><small>$</small> {location.state.price}</h5>
                     <h5 className="text-sm">incl. 14% VAT</h5>
-                    <h5>Stock: &#62; 10</h5>
                 </div>
                 <div name="item-page-quantity" className=" grid px-5 lg:grid-cols-2 grid-rows-2">
                     <div className="item-page-quantity flex justify-center align-middle">
@@ -86,7 +90,7 @@ const ItemPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-end">
-                        <a onClick={handleAddToCart} className="item-cart-button">Add to cart</a>
+                        <a onClick={handleAddToCart} className="mb-5 ease-in-out hover:scale-110 transition-all mx-auto font-medium item-cart-button lg:col-span-1 col-span-3 flex items-center justify-center mt-3 shadow-md">Add to cart</a>
                     </div>
                     
                 </div>
@@ -109,7 +113,7 @@ const ItemPage = () => {
                 ))}        
                 {showCartAddedMessage ? 
                 <div  
-                    className="bg-green-300 cart-added-message fade-in" 
+                    className="bg-green-300 cart-added-message fade-in py-4" 
                     name="cart-added-message">
                     <h1 className="text-center">"{location.state.itemName}" has been added to your Cart</h1>
                 </div> 

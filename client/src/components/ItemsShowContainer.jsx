@@ -63,7 +63,7 @@ const ItemsShowContainer = ({category, itemCount}) => {
             <SectionHeader name={"Explore our " + header}/>
             </div> 
 
-            <Carousel className="fade-in" showDots={false} responsive={responsive}>
+            <Carousel className="fade-in" showDots={false} responsive={responsive} dynamicHeight={true}>
             {newArray.map(item => (
             <ItemPreview 
                 imageLink={item.imageLink} 

@@ -35,7 +35,7 @@ const CartPage = () => {
         console.log("Removing");
         dispatch(setShowItemRemoved({value: true}));
         dispatch(removeShoppingCart({id: _id}));
-        window.location.reload(false);                 
+        window.location.reload(false);   
     }
 
     const handleCheckout = async () => {
@@ -77,8 +77,14 @@ const CartPage = () => {
             body: JSON.stringify({currentCart: currentCart})
         }); 
 
-        var {updatedItems, totalPrice} = await response.json();
-        console.log("Quantitys from server: " + updatedItems[0]["price"]);
+
+        var {updatedItems, totalPrice, message} = await response.json();
+
+        if(message != null)
+        {
+            console.log("Error: " + message);
+            return;
+        }
 
         // Add quantitys
         for(var i = 0; i < updatedItems.length; i++)
@@ -138,13 +144,14 @@ const CartPage = () => {
     return(     
         <>
              {updatedCartItems.length < 1 ? <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white shadow-md">
-                <h1 className="text-center text-lg font-bold">You currently have no items in your cart.</h1>
+             <SectionHeader name={"Shopping cart:"}/>
+                <h1 className="text-center text-lg font-bold mt-5">You currently have no items in your cart.</h1>
              </div>
             
             :
             
             
-        <div className="fade-in mt-10 lg:p-10 p-0 bg-white shadow-md">  
+        <div className="fade-in mt-10 lg:p-10 pb-5 bg-white shadow-md">  
                   
             <SectionHeader name={"Shopping cart:"}/>
             <div className="grid lg:grid-cols-6 lg:visible invisible lg:h-auto h-0 my-3 cart-table-header">

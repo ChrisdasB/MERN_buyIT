@@ -80,7 +80,7 @@ app.post('/create-checkout-session', validateApiKey, async (req, res)  => {
                 product_data: {
                     name: item.brandName + " - " + item.itemName
                 },
-                unit_amount: (item.price *100),                
+                unit_amount: (item.price *100).toFixed(0),                
             },
             quantity: item.quantity
         }       
@@ -93,7 +93,7 @@ app.post('/create-checkout-session', validateApiKey, async (req, res)  => {
 
     res.status(200).json({session});
     } catch (err) {
-        res.status(500).json({message: "We are sorry. Something went wrong :(. Please try again later!"});
+        res.status(500).json({message: "We are sorry. Something went wrong :(. Please try again later! Error: " + err.message});
     }
 })
 

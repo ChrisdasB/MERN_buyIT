@@ -67,11 +67,11 @@ const CategoryPage= () => {
             <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">
             <SectionHeader name={location.state.sectionHeader}/>
             <div className="grid place-content-around">
-                <h1 className="text-center text-lg">Sort by:</h1>
+                <h1 className="text-center text-lg font-bold">Sort by:</h1>
                 <div className="flex">
-                    <a onClick={() => setSorting("asc")}><h1 className="px-3">Price (asc.)</h1></a>
-                    <a onClick={() => setSorting("desc")}><h1 className="px-3">Price (desc.)</h1></a>
-                    <a onClick={() => setSorting("brand")}><h1 className="px-3">Brand</h1></a>
+                    <a onClick={() => setSorting("asc")}><h1 className="px-3 text-lg">Price (asc.)</h1></a>
+                    <a onClick={() => setSorting("desc")}><h1 className="px-3 text-lg">Price (desc.)</h1></a>
+                    <a onClick={() => setSorting("brand")}><h1 className="px-3 text-lg">Brand</h1></a>
                 </div>
 
             </div>

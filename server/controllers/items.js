@@ -21,11 +21,13 @@ export const getCartItems = async (req,res) => {
     try
     {
         const{currentCart} = req.body;
+        console.log(currentCart);
         var totalPrice = 0;
         var response = [];
         for( var i = 0; i < currentCart.length; i++)
         {
-            const currentResponse = await Items.findOne({_id: currentCart[i]["id"]});         
+            const currentResponse = await Items.findOne({_id: currentCart[i]["id"]});  
+            console.log("Found article:" + currentResponse.itemName);       
             totalPrice += (currentResponse.price * currentCart[i]["quantity"]);
             response.push(currentResponse);            
         }
@@ -34,6 +36,7 @@ export const getCartItems = async (req,res) => {
 
     catch (err)
      {
-        res.status(404).json({message: err.message});        
+        console.log("Something went wrong!" + err.message);
+        res.status(400).json({message: err.message});        
     }
 }

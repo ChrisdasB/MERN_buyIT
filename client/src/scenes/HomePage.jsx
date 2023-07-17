@@ -62,8 +62,7 @@ const HomePage = () => {
       }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
-        <>  
-        {console.log("Category 1 is: " + category1)}
+        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">          
             {loading ? <div style={{ minHeight:"100vh"}} className="flex items-center justify-center mt-5 text-lg font-extrabold"></div> 
             :
             <>
@@ -75,7 +74,7 @@ const HomePage = () => {
             <ItemsShowContainer category={category2} itemCount={8}/> 
             </>
         }                      
-        </>
+        </div>
     )
 }
 
