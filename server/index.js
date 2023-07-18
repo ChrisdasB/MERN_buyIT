@@ -98,7 +98,7 @@ app.post('/create-checkout-session', validateApiKey, async (req, res)  => {
 
 
 // DB POPULATING
-/* Items.insertMany(initItems); */
+/* Items.insertMany(initItems);  */
 
 // Mongoose setup
 const PORT = process.env.PORT || 6001; // Get the saved port vom .env file, fallback: 6001;
