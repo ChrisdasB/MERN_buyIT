@@ -34,7 +34,7 @@ const NavBar = () => {
                 <div className="grid lg:grid-cols-6 grid-cols-1 bg-white">
             {/* LOGO */}
             <div name="nav-logo-container" className="lg:col-span-1 col-span-6  lg:h-auto py-2 flex items-end justify-end">
-                <Link to="/"><img className="" style={{height:"70px", width: "auto", overflow:"hidden"}} src="./assets/images/BrandSingleLogoSlim.png"/></Link>
+                <Link to="/"><img className="" style={{height:"70px", width: "100%", overflow:"hidden"}} loading="lazy" src="./assets/images/BrandSingleLogoSlim.png"/></Link>
             </div>
             
             <div name="nav-mid-container" className="lg:col-span-4 col-span-6 grid grid-row-2">    
