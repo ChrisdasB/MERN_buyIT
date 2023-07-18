@@ -40,16 +40,16 @@ const CheckOut = ({handleCheckout}) => {
             <div className="col-span-4 lg:px-10 row-span-1 grid grid-rows-1 gap-5 ">
                 <h1 className="text-md text-red-700 text-center">This site is a pure demonstration and your data will not be saved anywhere!</h1>                
             </div>
-            <div className="lg:col-span-2 col-span-4 lg:px-10 px-5 grid grid-rows-6 gap-5 place-items-center">
+            <div className="lg:col-span-2 col-span-4 lg:px-10 px-5 grid grid-cols-1 gap-5 place-items-center">
                 {!formFilled ? 
                 <>
                 <h1 className="row-span-1 checkout-form-header">Personal Info's</h1>
-                <input value={formFirstName} onChange={(e) => setFormFirstName(e.target.value)} className="w-full" placeholder="Firstname"></input>
-                <input value={formLastName} onChange={(e) => setFormLastName(e.target.value)} className="w-full" placeholder="Lastname"></input>
-                <input value={formAdressName} onChange={(e) => setFormAdressName(e.target.value)} className="w-full" placeholder="Address"></input>
-                <input value={formCountryName} onChange={(e) => setFormCountryName(e.target.value)} className="w-full" placeholder="City"></input>
-                <a onClick={handelCheckForm} className="ease-in-out hover:scale-110 transition-all mx-auto font-medium item-cart-button lg:col-span-1 col-span-3 flex items-center justify-center mt-3 shadow-md">Next</a>
-                {showFormError ? <div className="text-red-600 font-bold">Please fill out the whole form.</div> : undefined}
+                <input value={formFirstName} onChange={(e) => setFormFirstName(e.target.value)} className="w-full col-span-4" placeholder="Firstname"></input>
+                <input value={formLastName} onChange={(e) => setFormLastName(e.target.value)} className="w-full col-span-4" placeholder="Lastname"></input>
+                <input value={formAdressName} onChange={(e) => setFormAdressName(e.target.value)} className="w-full col-span-4" placeholder="Address"></input>
+                <input value={formCountryName} onChange={(e) => setFormCountryName(e.target.value)} className="w-full col-span-4" placeholder="City"></input>
+                <a onClick={handelCheckForm} className=" ease-in-out hover:scale-110 transition-all mx-auto font-medium item-cart-button lg:col-span-4 col-span-4 flex items-center justify-center mt-3 shadow-md">Next</a>
+                {showFormError ? <div className="text-red-600 col-span-4 font-bold flex items-center justify-center row-span-1"><h1>Please fill out the whole form.</h1></div> : undefined}
                 </>
                 :
                 <>

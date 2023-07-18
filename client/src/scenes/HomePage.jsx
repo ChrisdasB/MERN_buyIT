@@ -51,6 +51,11 @@ const HomePage = () => {
         );
 
         const allItems = await response.json();
+        const {message} = allItems;
+        if(message)
+        {
+            setError(true);
+        }
         dispatch(setShopItems({items: allItems}));
 
         setTimeout(() => {

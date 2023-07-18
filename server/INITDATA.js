@@ -621,10 +621,10 @@ const initItems = [
         description: "Dive into the world of gaming with the TechPlus Gaming Curved Monitor. The curved display wraps around your field of view, providing a more immersive and engaging gaming experience. With its high refresh rate and fast response time, it ensures smooth gameplay with minimal motion blur. The Gaming Curved Monitor's vibrant colors and wide viewing angles enhance your gaming visuals, while the ergonomic design keeps you comfortable during extended gaming sessions. Elevate your gaming performance with the TechPlus Gaming Curved Monitor.",
         price: 1199.99,
         specs: {
-          resolution: "2560x1440",
-          size: 32,
-          refreshRate: "165Hz",
-          panel: "VA"
+          Resolution: "2560x1440",
+          Size: 32,
+          Hz: "165Hz",
+          Panel: "VA"
         },
         category: "monitor"
       },
@@ -636,10 +636,10 @@ const initItems = [
         description: "Experience gaming on the go with the UltraVision Portable Gaming Monitor. Featuring a compact and portable design, it easily connects to your gaming console or laptop, giving you a high-quality display wherever you are. With its high refresh rate and quick response time, it ensures smooth and responsive gameplay. The Portable Gaming Monitor's slim profile and built-in speakers make it the perfect choice for gamers on the move. Take your gaming adventures anywhere with the UltraVision Portable Gaming Monitor.",
         price: 599.99,
         specs: {
-          resolution: "1920x1080",
-          size: 15.6,
-          refreshRate: "144Hz",
-          panel: "IPS"
+          Resolution: "1920x1080",
+          Size: 15.6,
+          Hz: "144Hz",
+          Panel: "IPS"
         },
         category: "monitor"
       },
@@ -651,10 +651,10 @@ const initItems = [
         description: "Achieve precise color accuracy and detail with the TechPro Professional Studio Monitor. Designed for photographers, graphic designers, and video editors, it offers exceptional color reproduction and image clarity. The Professional Studio Monitor's wide color gamut and hardware calibration support ensure accurate and consistent results for your studio work. With its high-resolution display and ergonomic stand, it provides a comfortable and efficient workflow. Elevate your studio work with the TechPro Professional Studio Monitor.",
         price: 1799.99,
         specs: {
-          resolution: "3840x2160",
-          size: 27,
-          refreshRate: "60Hz",
-          panel: "IPS"
+          Resolution: "3840x2160",
+          Size: 27,
+          Hz: "60Hz",
+          Panel: "IPS"
         },
         category: "monitor"
       },
@@ -666,10 +666,10 @@ const initItems = [
         description: "Upgrade your workspace aesthetics with the GigaView Ultra-Slim Monitor. With its ultra-slim profile and minimal bezels, it adds a touch of elegance to your desk. The Ultra-Slim Monitor's high-resolution display and wide viewing angles provide crisp visuals from any perspective. Whether you're working on creative projects or enjoying multimedia content, it offers a seamless and immersive visual experience. Enhance your workspace with the GigaView Ultra-Slim Monitor.",
         price: 899.99,
         specs: {
-          resolution: "2560x1440",
-          size: 27,
-          refreshRate: "75Hz",
-          panel: "IPS"
+          Resolution: "2560x1440",
+          Size: 27,
+          Hz: "75Hz",
+          Panel: "IPS"
         },
         category: "monitor"
       },
@@ -681,10 +681,10 @@ const initItems = [
         description: "Enjoy reliable performance without breaking the bank with the MaxLinx Affordable Monitor. Designed for everyday computing tasks, it offers a balance of affordability and functionality. Whether you're browsing the web, working on documents, or enjoying multimedia content, the Affordable Monitor delivers a crisp and vibrant display. With its slim bezels and adjustable stand, it fits seamlessly into any workspace. Get the job done without compromising your budget with the MaxLinx Affordable Monitor.",
         price: 399.99,
         specs: {
-          resolution: "1920x1080",
-          size: 23.8,
-          refreshRate: "60Hz",
-          panel: "IPS"
+          Resolution: "1920x1080",
+          Size: 23.8,
+          Hz: "60Hz",
+          Panel: "IPS"
         },
         category: "monitor"
       },{

@@ -40,6 +40,9 @@ const CartPage = () => {
     }
 
     const handleCheckout = async () => {
+        try {
+
+        
 
         const response = await fetch(process.env.REACT_APP_SERVER_ROUTE + 'create-checkout-session', {
             method:'POST',
@@ -57,6 +60,10 @@ const CartPage = () => {
         const {url} = session;
         console.log(url);
         window.location = url;
+    }   catch(err) {
+        setError(true);
+        console.log("An error occured. Error: " + err.message);
+    }
     }
     
     if(showItemRemoved)
@@ -86,7 +93,8 @@ const CartPage = () => {
 
         if(message != null)
         {
-            console.log("Error: " + message);
+            console.log("An error occured. Error: " + message);
+            setError(true);
             return;
         }
 
@@ -107,6 +115,7 @@ const CartPage = () => {
     }   catch(err)
     {
         setError(true);
+        console.log("An error occured. Error: " + err.message);
     }
     }
 
@@ -155,7 +164,7 @@ const CartPage = () => {
             :
             
         <>
-             {updatedCartItems.length < 1 ? <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white shadow-md">
+             {updatedCartItems.length < 1 ? <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white">
              <SectionHeader name={"Shopping cart:"}/>
                 <h1 className="text-center text-lg font-bold mt-5">You currently have no items in your cart.</h1>
              </div>
@@ -163,7 +172,7 @@ const CartPage = () => {
             :
             
             
-        <div className="fade-in mt-10 lg:p-10 pb-5 bg-white shadow-md">  
+        <div className="fade-in mt-10 lg:p-10 pb-5 bg-white">  
                   
             <SectionHeader name={"Shopping cart:"}/>
             <div className="grid lg:grid-cols-6 lg:visible invisible lg:h-auto h-0 my-3 cart-table-header">

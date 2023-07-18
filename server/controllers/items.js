@@ -2,7 +2,7 @@ import Items from "../models/Item.js";
 import mongoose from "mongoose";
 
 export const getAllItems = async (req,res) => {
-    console.log("Getting Backend items!");
+    
     try
     {
     const response = await Items.find();
@@ -12,14 +12,14 @@ export const getAllItems = async (req,res) => {
 
     catch(err) 
     {
-        res.status(404).json({message: err.message});
+        res.status(400).json({message: err.message});
     }
     
 }
 
 export const getCartItems = async (req,res) => {
     try
-    {
+    {        
         const{currentCart} = req.body;
         console.log(currentCart);
         var totalPrice = 0;

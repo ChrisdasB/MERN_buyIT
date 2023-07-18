@@ -191,7 +191,10 @@ border-radius: 10px;
   left: 0%;
   font-size: x-large;
   font-weight: 700;
+  opacity: 95%;
   background: linear-gradient(135deg, #9645D7 0%, #b4a0c4 100%);
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /* CHECKOUT PAGE STYLING */
