@@ -14,7 +14,7 @@ const SuccessPage = () => {
       }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
-        <div style={{height: "auto"}} className="fade-in mt-10 lg:p-10 p-0 bg-white">
+        <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white">
              <SectionHeader name=""/>
             <div className="grid grid-rows-6 grid-cols-1 mt-5">
                 <div>
