@@ -30,13 +30,13 @@ const CategoryPage= () => {
         setRender(false);
         setTimeout(() => {
             setRender(true);
-          }, "500");
+          }, "3000");
     }
 
     useEffect(() => {            
         handleLoading();
         
-      }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      }, [location.state]); // eslint-disable-line react-hooks/exhaustive-deps
     
 
     if(location.state != null && items.length != 0)
@@ -90,9 +90,9 @@ const CategoryPage= () => {
                 </div>
 
             </div>
-            <div className="grid xl:grid-cols-5 md:grid-cols-3 px-5 md:px-0 gap-0 ">
+            <div key={location.state.category} className="grid xl:grid-cols-5 md:grid-cols-3 px-5 md:px-0 gap-0 ">
             
-            {newArray.map(item => (
+                {newArray.map(item => (
                 <ItemPreview 
                 imageLink={item.imageLink} 
                 brandName={item.brandName} 
