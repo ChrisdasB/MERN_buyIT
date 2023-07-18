@@ -40,7 +40,7 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         >
 
             <div name="item-preview-img"  className="text-white row-span-4 flex items-center justify-center">
-                {imgLoaded ? undefined : <div className="image-placeholder" style={{ objectFit:"cover"}}></div>}
+                {imgLoaded ? undefined : <div className="image-placeholder" style={{height:"300px", width:"100px", position:"absolute",objectFit:"cover"}}></div>}
                 <img className="self-start p-2" style={{ objectFit:"cover"}} loading="lazy" onLoad={handleImgLoaded} src={imageLink}/>
             </div>
             <div name="item-brand" className="flex items-end justify-center mt-2"><h5 className="text-center">{brandName}</h5></div>            
