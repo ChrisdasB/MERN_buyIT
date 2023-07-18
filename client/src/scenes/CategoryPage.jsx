@@ -90,7 +90,7 @@ const CategoryPage= () => {
                 </div>
 
             </div>
-            <div key={location.state.category} className="grid xl:grid-cols-5 md:grid-cols-3 px-5 md:px-0 gap-0 ">
+            <div key={location.state.category} className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 px-5 md:px-0 gap-0 ">
             
                 {newArray.map(item => (
                 <ItemPreview 

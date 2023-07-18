@@ -82,7 +82,7 @@ const HomePage = () => {
         :    
     
         <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">          
-            {loading ? <div style={{ minHeight:"100vh"}} className="flex items-center justify-center mt-5 text-lg font-extrabold">Loading IT ... </div> 
+            {loading ? <div style={{ minHeight:"100vh"}} className="flex items-start justify-center mt-5 text-lg font-extrabold animate-pulse">Loading IT ... </div> 
             :
             <>
             <Responsive/>

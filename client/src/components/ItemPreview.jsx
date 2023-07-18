@@ -34,7 +34,7 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         >
 
             <div name="item-preview-img"  className="text-white row-span-4 flex items-center justify-center">                
-                <img className="self-start p-2" style={{ objectFit:"cover"}} loading="lazy" src={imageLink}/>
+                <img className="self-start p-2" style={{ maxHeight:"270px", width:"270px"}} loading="lazy" src={imageLink}/>
             </div>
             <div name="item-brand" className="flex items-end justify-center mt-2"><h5 className="text-center">{brandName}</h5></div>            
             <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-center">
