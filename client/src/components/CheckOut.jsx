@@ -48,7 +48,7 @@ const CheckOut = ({handleCheckout}) => {
                 <input value={formLastName} onChange={(e) => setFormLastName(e.target.value)} className="w-full" placeholder="Lastname"></input>
                 <input value={formAdressName} onChange={(e) => setFormAdressName(e.target.value)} className="w-full" placeholder="Address"></input>
                 <input value={formCountryName} onChange={(e) => setFormCountryName(e.target.value)} className="w-full" placeholder="City"></input>
-                <a onClick={handelCheckForm} className="item-cart-button">Next</a>
+                <a onClick={handelCheckForm} className="ease-in-out hover:scale-110 transition-all mx-auto font-medium item-cart-button lg:col-span-1 col-span-3 flex items-center justify-center mt-3 shadow-md">Next</a>
                 {showFormError ? <div className="text-red-600 font-bold">Please fill out the whole form.</div> : undefined}
                 </>
                 :

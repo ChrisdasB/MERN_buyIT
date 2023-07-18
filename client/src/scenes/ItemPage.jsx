@@ -68,7 +68,7 @@ const ItemPage = () => {
         
         <div className="mt-10 grid lg:grid-cols-2 lg:grid-rows-3 grid-rows-2 lg:p-10 p-5 gap-5 bg-white shadow-none">
             <div style={{objectFit:"cover"}} name="item-page-image" className="col-span-1 row-span-2 flex items-center justify-center">
-                <img className="shadow-md p-5" src={location.state.imageLink}></img>
+                <img className="shadow-md lg:shadow-none p-5" src={location.state.imageLink}></img>
             </div>   
 
             <div className="col-span-1 row-span-2 lg:p-5 p-0 grid grid-rows-2  shadow-none lg:shadow-md">        
@@ -113,7 +113,7 @@ const ItemPage = () => {
                 ))}        
                 {showCartAddedMessage ? 
                 <div  
-                    className="bg-green-300 cart-added-message fade-in py-4" 
+                    className="cart-added-message fade-in py-4" 
                     name="cart-added-message">
                     <h1 className="text-center">"{location.state.itemName}" has been added to your Cart</h1>
                 </div> 

@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useSelector } from "react-redux";
+import { Responsive } from "./ResponsiveSlider";
 
 
 
@@ -57,26 +58,16 @@ const ItemsShowContainer = ({category, itemCount}) => {
         }
       };
 
+      console.log(newArray.length);
+
     return(
         <>
             <div className="mt-10 fade-in">
             <SectionHeader name={"Explore our " + header}/>
             </div> 
-
-            <Carousel className="fade-in" showDots={false} responsive={responsive} dynamicHeight={true}>
-            {newArray.map(item => (
-            <ItemPreview 
-                imageLink={item.imageLink} 
-                brandName={item.brandName} 
-                itemName={item.itemName} 
-                price={item.price} key={key++} 
-                description={item.description}
-                descriptionHeader={item.descriptionHeader}
-                specs={item.specs}
-                _id={item._id}
-            />
-        ))}
-            </Carousel>
+            <div className="p-10 flex items-center justify-center">
+            <Responsive className="fade-in" items={newArray}/>
+            </div>
 
             <div name="items-show-container" className="mt-5 flex gap-x-5 items-center justify-center gap-y-5 ">       
         </div>         

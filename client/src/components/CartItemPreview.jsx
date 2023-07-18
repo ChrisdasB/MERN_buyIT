@@ -28,9 +28,9 @@ const CartItemPreview = ({handleRemoveShoppingCart, imageLink, quantity, brandNa
                 <div className="flex items-center justify-center lg:mr-5 mr-0">
                 <a onClick={() => handleRemoveShoppingCart(_id)}>
                     <img                     
-                    style={{maxHeight:"22px"}}
-                     src="./assets/icons/iconDelete.png"
-                      className="flex items-center justify-center md:mx-2 mx-0 lg:col-span-1 col-span-3"
+                    style={{maxHeight:"30px"}}
+                     src="./assets/icons/iconMenuOpen.png"
+                      className="hover:scale-110 flex items-center justify-center md:mx-2 mx-0 lg:col-span-1 col-span-3"
                       ></img>
                     </a>
                 </div>

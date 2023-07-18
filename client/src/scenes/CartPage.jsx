@@ -7,6 +7,7 @@ import { setShowItemRemoved } from "../state";
 import { useDispatch } from "react-redux";
 import { removeShoppingCart } from "../state";
 import CheckOut from "../components/CheckOut";
+import ErrorComponent from "../components/Error";
 
 const CartPage = () => {
     // Get data from store
@@ -18,10 +19,10 @@ const CartPage = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [showCheckout, setShowCheckout] = useState(false);
     const [seed, setSeed] = useState(1);
+    const [error, setError] = useState(false);
     const checkoutSection = useRef(null);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleShowCheckout = (elementRef) => {
         setShowCheckout(true);
@@ -66,6 +67,9 @@ const CartPage = () => {
     }
 
     const resolveCartItems = async () => {
+        try {
+
+       
         if(currentCart.length < 1)
         {
             return;
@@ -100,6 +104,10 @@ const CartPage = () => {
 
         setUpdatedCartItems(updatedItems);
         setTotalPrice(totalPrice.toFixed(2));
+    }   catch(err)
+    {
+        setError(true);
+    }
     }
 
     useEffect(() => {        
@@ -142,6 +150,10 @@ const CartPage = () => {
     ]
 
     return(     
+        <>
+            {error ? <ErrorComponent/>
+            :
+            
         <>
              {updatedCartItems.length < 1 ? <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white shadow-md">
              <SectionHeader name={"Shopping cart:"}/>
@@ -211,6 +223,8 @@ const CartPage = () => {
         </div>
     }
         </> 
+        }
+        </>
     )
 };
 export default CartPage;

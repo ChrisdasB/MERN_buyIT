@@ -75,7 +75,7 @@ const CategoryPage= () => {
                 </div>
 
             </div>
-            <div className="grid lg:grid-cols-5 p-x gap-0 ">
+            <div className="grid xl:grid-cols-5 md:grid-cols-3 px-5 md:px-0 gap-0 ">
             
             {newArray.map(item => (
                 <ItemPreview 
@@ -98,9 +98,9 @@ else
 
 {
     return(
-        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">
-            <h1 className="text-lg font-bold">Something went wrong ...</h1>
-            <h1>We are redirecting to the homepage.</h1>
+        <div style={{height:"100vh"}} className="category-page-container mt-10 lg:p-10 p-0 bg-white">
+            <h1 className="text-lg font-bold text-center">Something went wrong ...</h1>
+            <h1 className="text-lg font-bold text-center">We are redirecting to the homepage.</h1>
             {startRedirect()}
         </div>
     )

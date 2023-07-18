@@ -5,11 +5,16 @@ import ItemsShowContainer from "../components/ItemsShowContainer";
 import { useEffect, useState } from "react";
 import { setShopItems } from "../state";
 import { useDispatch, useSelector } from "react-redux";
+import {Responsive} from "../components/ResponsiveSlider";
+import ErrorComponent from "../components/Error";
 
 const HomePage = () => {
+    // Variable
+    const carouselItemCount = 6;
+
     // Hooks
     const [loading, setLoading] = useState(true);
-    const [rerender, setRerender] = useState("");
+    const [error, setError] = useState(false)
 
     // Get random Categorys  
     var categorys = ["pc", "laptop", "monitor", "peripheral"];
@@ -35,6 +40,9 @@ const HomePage = () => {
     const dispatch = useDispatch();    
 
     const GetAllItems = async () => {
+        try {
+
+        
         const response = await fetch(process.env.REACT_APP_SERVER_ROUTE +  "items/all",
         {
             method: "GET",
@@ -50,7 +58,11 @@ const HomePage = () => {
           }, "500");
         
         
-               
+        }
+        catch(err) {
+            setError(true);
+            console.log("An error occured. Error: " + err.message);
+        }
     }
 
     useEffect(() => {
@@ -62,19 +74,26 @@ const HomePage = () => {
       }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
+        <>
+        {error ? <ErrorComponent/>
+        :    
+    
         <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">          
             {loading ? <div style={{ minHeight:"100vh"}} className="flex items-center justify-center mt-5 text-lg font-extrabold"></div> 
             :
             <>
+            <Responsive/>
             {/* <div className="flex items-center justify-center mt-5 fade-in">
                 
             <img style={{maxHeight:"200px"}} src="https://cdn.macovi.de/images/banner/1688037442.webp"></img>
             </div> */}
-            <ItemsShowContainer category={category1} itemCount={8}/>
-            <ItemsShowContainer category={category2} itemCount={8}/> 
+            <ItemsShowContainer category={category1} itemCount={carouselItemCount}/>
+            <ItemsShowContainer category={category2} itemCount={carouselItemCount}/> 
             </>
         }                      
         </div>
+        }
+        </>
     )
 }
 
