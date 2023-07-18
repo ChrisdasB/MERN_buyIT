@@ -30,11 +30,6 @@ a {
   font-weight: 500;
 }
 
-.image-placeholder {  
-  background-color: #eee;
-  filter: blur(20px); /* Adjust the blur amount as desired */
-}
-
 /* COMPONENT STYLING */
 .card-header {
   height: 10px;

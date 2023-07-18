@@ -17,12 +17,26 @@ const CategoryPage= () => {
 
     // Hooks
     const [sorting, setSorting] = useState("");
+    const [render, setRender] = useState(false);
 
     const startRedirect = () => {
         setTimeout(() => {
             navigate("/")
           }, "3000");
     }
+
+    const handleLoading = () => {
+        console.log("Resetting render!");
+        setRender(false);
+        setTimeout(() => {
+            setRender(true);
+          }, "500");
+    }
+
+    useEffect(() => {            
+        handleLoading();
+        
+      }, []); // eslint-disable-line react-hooks/exhaustive-deps
     
 
     if(location.state != null && items.length != 0)
@@ -59,6 +73,8 @@ const CategoryPage= () => {
             })
             }
         }    
+
+        
 
         
 
