@@ -14,7 +14,6 @@ const CategoryPage= () => {
 
     // variables from shop
     const items = useSelector((state) => state.shopItems);
-    console.log(location.state == null);
 
     // Hooks
     const [sorting, setSorting] = useState("");

@@ -58,7 +58,7 @@ const ItemsShowContainer = ({category, itemCount}) => {
         }
       };
 
-      console.log(newArray.length);
+      
 
     return(
         <>

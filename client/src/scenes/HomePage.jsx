@@ -74,8 +74,6 @@ const HomePage = () => {
         dispatch(setShopItems({items: []}))
         GetAllItems();
         
-        console.log(category1);
-        
       }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(

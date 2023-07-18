@@ -16,7 +16,6 @@ export const visitorSlice =  createSlice({
     initialState,
     reducers: {
         setShowItemRemoved: (state, action) => {
-            console.log("Showing message!");
             state.showItemRemoved = action.payload.value;            
         },
         addRecentlyViewed: (state, action) => {
@@ -36,14 +35,12 @@ export const visitorSlice =  createSlice({
             state.shoppingCart.push(action.payload.item);
         },
         removeShoppingCart: (state, action) => {
-            console.log("REmoving here also!");
             var tempCart = [...state.shoppingCart];
             for(var i = 0; i < state.shoppingCart.length; i++)
             {                
                 if(state.shoppingCart[i]["_id"] === action.payload.id)
                 {
                     tempCart.pop(state.shoppingCart[i]["_id"]);
-                    console.log(tempCart);
                     state.shoppingCart = tempCart;
                     return;
                 }

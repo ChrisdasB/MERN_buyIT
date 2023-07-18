@@ -20,7 +20,6 @@ const ItemPage = () => {
     const handleAddToCart = () => {
         if(location.state._id == null || location.state._id.length < 1)
         {
-            console.log("Id could not be found!");
             return;
         }
         dispatch(addShoppingCart({item: {

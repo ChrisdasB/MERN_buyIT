@@ -65,7 +65,6 @@ export const Responsive = ({items}) => {
           }
         ]
       };
-      console.log(items);
       const test = ["1", "2", "3"]
       return (
         <div className="">

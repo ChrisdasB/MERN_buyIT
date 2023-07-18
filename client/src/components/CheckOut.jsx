@@ -1,23 +1,19 @@
-import { useSelector } from "react-redux";
 import SectionHeader from "./SectionHeader";
 import { useState } from "react";
 
 const CheckOut = ({handleCheckout}) => {
 
     const [disclaimerChecked, setDisclaimerChecked] = useState(false);
-    const [processClicked, setProcessClicked] = useState(false);
 
     // Form Hooks
     const [formFilled, setFormFilled] = useState(false);
     const [showFormError, setShowFormError] = useState(false);
-    const [showNextStep, setShowNextStep] = useState(false);
     const [formFirstName, setFormFirstName] = useState("");
     const [formLastName, setFormLastName] = useState("");
     const [formAdressName, setFormAdressName] = useState("");
     const [formCountryName, setFormCountryName] = useState("");
 
     const handelCheckoutClicked = () => {
-        console.log("Checkout clicked!")
         handleCheckout();
         setDisclaimerChecked(false);
     }

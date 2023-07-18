@@ -19,7 +19,6 @@ import './App.css';
 function App() {
   // Init location
   const location = useLocation();
-  console.log(location);
 
   return (
     

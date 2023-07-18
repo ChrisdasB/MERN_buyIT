@@ -26,7 +26,6 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
 // Routes
 app.get('/', validateApiKey,  (req, res) => {
-    console.log("Ja Moin!");
     res.status(200).json({message: "Hello World!"});
   });
 
@@ -52,7 +51,7 @@ app.post('/create-checkout-session', validateApiKey, async (req, res)  => {
             const currentResponse = await Items.findOne({_id: items[i]["_id"]});     
             response.push(currentResponse);            
         }
-        //console.log(response);
+        
 
     // Add Quantitiys
     for(var i = 0; i < response.length; i++)

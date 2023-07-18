@@ -33,7 +33,6 @@ const CartPage = () => {
     }
 
     function handleRemoveShoppingCart(_id) {
-        console.log("Removing");
         dispatch(setShowItemRemoved({value: true}));
         dispatch(removeShoppingCart({id: _id}));
         window.location.reload(false);   
@@ -58,7 +57,6 @@ const CartPage = () => {
         const stripeResponse = await response.json();
         const {session} = stripeResponse;
         const {url} = session;
-        console.log(url);
         window.location = url;
     }   catch(err) {
         setError(true);

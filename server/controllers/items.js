@@ -21,13 +21,11 @@ export const getCartItems = async (req,res) => {
     try
     {        
         const{currentCart} = req.body;
-        console.log(currentCart);
         var totalPrice = 0;
         var response = [];
         for( var i = 0; i < currentCart.length; i++)
         {
-            const currentResponse = await Items.findOne({_id: currentCart[i]["id"]});  
-            console.log("Found article:" + currentResponse.itemName);       
+            const currentResponse = await Items.findOne({_id: currentCart[i]["id"]});      
             totalPrice += (currentResponse.price * currentCart[i]["quantity"]);
             response.push(currentResponse);            
         }
