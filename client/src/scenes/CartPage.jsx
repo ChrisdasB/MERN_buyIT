@@ -20,6 +20,7 @@ const CartPage = () => {
     const [showCheckout, setShowCheckout] = useState(false);
     const [seed, setSeed] = useState(1);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
     const checkoutSection = useRef(null);
 
     const dispatch = useDispatch();
@@ -77,6 +78,7 @@ const CartPage = () => {
        
         if(currentCart.length < 1)
         {
+            setLoading(false);
             return;
         }
 
@@ -110,6 +112,7 @@ const CartPage = () => {
 
         setUpdatedCartItems(updatedItems);
         setTotalPrice(totalPrice.toFixed(2));
+        setLoading(false);
     }   catch(err)
     {
         setError(true);
@@ -159,18 +162,19 @@ const CartPage = () => {
     return(     
         <>
             {error ? <ErrorComponent/>
+
             :
             
         <>
-             {updatedCartItems.length < 1 ? <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white">
+             {updatedCartItems.length < 1 && <div style={{height: "100vh"}} className="fade-in mt-10 lg:p-10 p-0 bg-white">
              <SectionHeader name={"Shopping cart:"}/>
-                <h1 className="text-center text-lg font-bold mt-5">You currently have no items in your cart.</h1>
-             </div>
-            
-            :
+                <h1 className="text-center text-lg font-bold mt-5">{loading ? <>Looking up your awesome choices!</> : <>You have no items in your cart.</>}</h1>
+             </div>}
             
             
-        <div className="fade-in mt-10 lg:p-10 pb-5 bg-white">  
+            
+             {updatedCartItems.length > 0 &&    
+            <div className="fade-in mt-10 lg:p-10 pb-5 bg-white">  
                   
             <SectionHeader name={"Shopping cart:"}/>
             <div className="grid lg:grid-cols-6 lg:visible invisible lg:h-auto h-0 my-3 cart-table-header">
@@ -228,7 +232,7 @@ const CartPage = () => {
              </div> 
             
         </div>
-    }
+        }
         </> 
         }
         </>
