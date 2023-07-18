@@ -1,9 +1,14 @@
 // Import navigation
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const ItemPreview = ({imageLink, brandName, itemName, price, description, descriptionHeader, specs,  _id}) => {
     // Setup navigate
     const navigate = useNavigate();
+
+    // Hooks
+    const [imgLoaded, setImgLoaded] = useState(false);
+    
 
     // Functions
     const handleItemNavigation = () => {
@@ -22,6 +27,11 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         )
     }
 
+    const handleImgLoaded = () => {
+        console.log("Image loaded!");
+        setImgLoaded(true);
+    }
+
     return(
         <>
         <a onClick={() => handleItemNavigation()} 
@@ -30,7 +40,8 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         >
 
             <div name="item-preview-img"  className="text-white row-span-4 flex items-center justify-center">
-                <img className="self-start p-2" style={{ objectFit:"cover"}} loading="lazy" src={imageLink}/>
+                {imgLoaded ? undefined : <div className="image-placeholder"></div>}
+                <img className="self-start p-2" style={{ objectFit:"cover"}} loading="lazy" onLoad={handleImgLoaded} src={imageLink}/>
             </div>
             <div name="item-brand" className="flex items-end justify-center mt-2"><h5 className="text-center">{brandName}</h5></div>            
             <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-center">
