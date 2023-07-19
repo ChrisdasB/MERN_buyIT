@@ -35,7 +35,7 @@ const CartItemPreview = ({handleRemoveShoppingCart, imageLink, quantity, brandNa
             </a>
             </div>
             <div className="col-span-2 lg:col-span-1 grid-rows-2 flex items-center justify-center">
-                    <img className="lg:h-20 h-12 lg:w-auto p-2" style={{maxHeight:"100%"}} src={imageLink}></img>
+                    <img className="lg:h-20 h-12 lg:w-auto lg:p-2 pt-1" style={{maxHeight:"100%"}} src={imageLink}></img>
                     </div>
             <div className="lg:h-20 h-10 lg:col-span-2 col-span-3 grid ls:place-content-center ls:place-items-center">
                 <small className="invisible h-0">Item</small>
