@@ -7,6 +7,7 @@ import { setShopItems } from "../state";
 import { useDispatch, useSelector } from "react-redux";
 import {Responsive} from "../components/ResponsiveSlider";
 import ErrorComponent from "../components/Error";
+import Advertisement from "../components/Advertisement";
 
 const HomePage = () => {
     // Variable
@@ -14,7 +15,8 @@ const HomePage = () => {
 
     // Hooks
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+  
 
     // Get random Categorys  
     var categorys = ["pc", "laptop", "monitor", "peripheral"];
@@ -34,6 +36,8 @@ const HomePage = () => {
             category1 = recentlyViewed[(Math.random() * recentlyViewed.length)].toString();
             category2 = categorys.splice((Math.random() * categorys.length) | 0, 1).toString();
         }
+
+    
     
 
     // Init dispatch
@@ -73,24 +77,28 @@ const HomePage = () => {
     useEffect(() => {
         dispatch(setShopItems({items: []}))
         GetAllItems();
-        
       }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
         <>
+        
         {error ? <ErrorComponent/>
         :    
-    
-        <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">          
-            {loading ? <div style={{ minHeight:"100vh"}} className="flex items-start justify-center mt-5 text-lg font-extrabold animate-pulse">Loading IT ... </div> 
+        
+        <div className="category-page-container lg:px-10 p-0 bg-white">      
+        <Advertisement headline={"Accelarate your Work!"} info={"Coming soon!"}/>    
+            {loading ? <div style={{ minHeight:"100vh"}} className="text-center text-lg ">
+                <h1 className="animate-pulse row-span-1 font-extrabold">Loading It ...</h1>                
+            </div> 
             :
             <>
-            <Responsive/>
+            
             {/* <div className="flex items-center justify-center mt-5 fade-in">
                 
             <img style={{maxHeight:"200px"}} src="https://cdn.macovi.de/images/banner/1688037442.webp"></img>
             </div> */}
             <ItemsShowContainer category={category1} itemCount={carouselItemCount}/>
+            <Advertisement headline={"Gaming on a new Level!"} info={"Just finish it!"}/>
             <ItemsShowContainer category={category2} itemCount={carouselItemCount}/> 
             </>
         }                      

@@ -200,8 +200,8 @@ const CartPage = () => {
             ))}   
             </div>         
             <div className="colorfull-divider"></div>
-            <div className="grid lg:grid-cols-6 grid-cols-3 place-items-center my-3 cart-table-header">
-                <h5 className="lg:col-span-4 col-span-0 flex items-center justify-center"></h5>                
+            <div className="grid lg:grid-cols-7 grid-cols-3 place-items-center my-3 cart-table-header">
+                <h5 className="lg:col-span-5 col-span-0 flex items-center justify-center"></h5>                
                 <h5 className="col-span-1 flex items-center justify-center underline">TOTAL</h5>
                 <h5 className="col-span-1 flex items-center justify-center underline">{totalPrice} $</h5>
             </div>

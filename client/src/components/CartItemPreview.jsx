@@ -23,32 +23,33 @@ const CartItemPreview = ({handleRemoveShoppingCart, imageLink, quantity, brandNa
     }
 
     return(
-        <div className="fade-in cart-item-preview grid lg:grid-cols-6 grid-cols-3 grid-rows-2 lg:grid-rows-1 lg:my-3 my-0 cart-item-preview-shadow">
-            <div className="h-20 col-span-1 grid grid-cols-3">
-                <div className="flex items-center justify-center lg:mr-5 mr-0">
-                <a onClick={() => handleRemoveShoppingCart(_id)}>
-                    <img                     
-                    style={{maxHeight:"30px"}}
-                     src="./assets/icons/iconMenuOpen.png"
-                      className="hover:scale-110 flex items-center justify-center md:mx-2 mx-0 lg:col-span-1 col-span-3"
-                      ></img>
-                    </a>
-                </div>
-                    <img className="span-row-1 lg:h-20 lg:w-auto p-2 h-0 w-0 lg:visible invisible col-span-2" style={{maxHeight:"100%"}} src={imageLink}></img>
+        <div className="fade-in cart-item-preview grid lg:grid-cols-7 grid-cols-3 grid-rows-2 lg:grid-rows-1 lg:my-3 my-0 cart-item-preview-shadow">
+            
+            <div className="flex justify-center items-center col-span-1  lg:mr-5 mr-0">
+            <a onClick={() => handleRemoveShoppingCart(_id)}>
+                <img                     
+                style={{maxHeight:"30px"}}
+                src="./assets/icons/iconMenuOpen.png"
+                className="hover:scale-110 flex items-center justify-center mx-0 col-span-1"
+                ></img>
+            </a>
             </div>
-            <div className="h-20 col-span-2 grid place-content-center place-items-center">
-                <small className="lg:invisible lg:h-0 visible h-auto">Item</small>
-                <a className="color-clickable cart-item-name-link hover:scale-105 ease-in-out transition-all" onClick={handleItemNavigation} target="_blank"><h1>{brandName} - {itemName}</h1></a>
+            <div className="col-span-2 lg:col-span-1 grid-rows-2 flex items-center justify-center">
+                    <img className="lg:h-20 h-12 lg:w-auto p-2" style={{maxHeight:"100%"}} src={imageLink}></img>
+                    </div>
+            <div className="lg:h-20 h-10 lg:col-span-2 col-span-3 grid ls:place-content-center ls:place-items-center">
+                <small className="invisible h-0">Item</small>
+                <a className="color-clickable cart-item-name-link hover:scale-105 ease-in-out transition-all text-center text-sm" onClick={handleItemNavigation} target="_blank"><h1>{brandName} - {itemName}</h1></a>
             </div>
-            <div className="h-20 col-span-1 grid place-content-center place-items-center">
+            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs md:text-base font-bold">
                 <small className="lg:invisible lg:h-0 visible h-auto">Quanitity</small>
-            <h1>{quantity} x</h1>
+                <h1>{quantity} x</h1>
             </div>
-            <div className="h-20 col-span-1 grid place-content-center place-items-center">
-            <small className="lg:invisible lg:h-0 visible h-auto">per Piece</small>
+                <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs font-bold md:text-base">
+                <small className="lg:invisible lg:h-0 visible h-auto">per Piece</small>
             <h1>{price.toFixed(2)} $</h1>
             </div>
-            <div className="h-20 col-span-1 grid place-content-center place-items-center">
+            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs font-bold md:text-base">
             <small className="lg:invisible lg:h-0 visible h-auto">Price</small>    
             <h1>{(+price * +quantity).toFixed(2)} $</h1>
             </div>

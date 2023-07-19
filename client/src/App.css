@@ -30,6 +30,10 @@ a {
   font-weight: 500;
 }
 
+.advertisement-container {
+  background: radial-gradient(circle, rgb(114, 46, 103) 0%, rgb(0, 0, 0) 100%);;
+}
+
 /* COMPONENT STYLING */
 .card-header {
   height: 10px;

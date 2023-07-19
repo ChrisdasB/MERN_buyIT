@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState} from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Advertisement from "../components/Advertisement";
+
 
 
 const CategoryPage= () => {
@@ -79,7 +81,11 @@ const CategoryPage= () => {
         
 
         return(
-            <div className="category-page-container mt-10 lg:p-10 p-0 bg-white">
+            <>
+            
+            <div className="category-page-container lg:px-10 p-0 bg-white">
+            <Advertisement headline={"So be IT!"} info={"Big sale comming up... sometime!"}/>
+            <div className="mt-10"></div>
             <SectionHeader name={location.state.sectionHeader}/>
             <div className="grid place-content-around">
                 <h1 className="text-center text-lg font-bold">Sort by:</h1>
@@ -104,8 +110,11 @@ const CategoryPage= () => {
                 _id={item._id}
             />
             ))}
+            
                 </div>
+                <Advertisement headline={"Some catchy Text!"} info={"If you read this, it worked!"}/>
             </div>
+            </>
         )
 
 }
