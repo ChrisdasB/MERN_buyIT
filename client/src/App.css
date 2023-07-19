@@ -101,6 +101,14 @@ a {
   font-size: 1rem;
 }
 
+.image-inactive {
+  height: 200px;
+}
+
+.image-active {
+  width: 270px;
+  max-height: 270px;
+}
 
 
 /* CAROUSEL STYLING */

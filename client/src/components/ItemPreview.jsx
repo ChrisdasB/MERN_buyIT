@@ -6,6 +6,9 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
     // Setup navigate
     const navigate = useNavigate();
 
+    // Image Hook
+    const[imgLoaded, setImageLoaded] = useState(false);
+
 
     // Functions
     const handleItemNavigation = () => {
@@ -24,6 +27,9 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         )
     }
 
+    const handleImageLoaded = () => {
+        setImageLoaded(true);
+    }
     
 
     return(
@@ -32,9 +38,10 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
         name="item-preview"
         className="item-preview grid grid-rows-8 pt-2 lg:my-10 my-2 mx-1 md:shadow-none shadow-md"
         >
-
-            <div name="item-preview-img"  className="text-white row-span-4 flex items-center justify-center">                
-                <img className="self-start p-2" style={{ maxHeight:"270px", width:"270px"}} loading="lazy" src={imageLink}/>
+            
+            <div name="item-preview-img" className={imgLoaded ? "text-white row-span-4 flex items-center justify-center" : "text-white bg-gray-200 animate-pulse row-span-4 flex items-center justify-center"}>   
+                           
+                <img className={imgLoaded ? "self-start p-2 image-active" : "self-start p-2 image-inactive"} onLoad={handleImageLoaded} loading="lazy" src={imageLink}/>
             </div>
             <div name="item-brand" className="flex items-end justify-center mt-2"><h5 className="text-center">{brandName}</h5></div>            
             <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-center">
