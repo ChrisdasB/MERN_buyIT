@@ -1,69 +1,60 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
+/* Initial states for redux-store */
 const initialState = {
-    recentlyViewed: [],
-    shopItems:[],
-    shoppingCart: [],
-    currentItem: {},
-    checkoutCart: [],
-    checkoutAmount: 0.0,
-    showItemRemoved: false
-}
+  shopItems: [],
+  shoppingCart: [],
+  checkoutAmount: 0.0,
+  showItemRemoved: false,
+};
 
-export const visitorSlice =  createSlice({
-    name: "visitor",
-    initialState,
-    reducers: {
-        setShowItemRemoved: (state, action) => {
-            state.showItemRemoved = action.payload.value;            
-        },
-        addRecentlyViewed: (state, action) => {
-            state.recentlyViewed += action.payload.recentlyViewed;
-        },
-        addShoppingCart: (state, action) => {
-
-            for(var i = 0; i < state.shoppingCart.length; i++)
-            {
-                if(state.shoppingCart[i]["id"] === action.payload.item["id"])
-                {
-                    state.shoppingCart[i]["quantity"] += action.payload.item["quantity"];
-                    return;
-                }
-            }
-
-            state.shoppingCart.push(action.payload.item);
-        },
-        removeShoppingCart: (state, action) => {
-            var tempCart = [...state.shoppingCart];
-            for(var i = 0; i < state.shoppingCart.length; i++)
-            {                
-                if(state.shoppingCart[i]["_id"] === action.payload.id)
-                {
-                    tempCart.pop(state.shoppingCart[i]["_id"]);
-                    state.shoppingCart = tempCart;
-                    return;
-                }
-            }
-        },
-        resetShoppingCart: (state, action) => {
-            state.shoppingCart = [];
-        },
-        setCurrentItem: (state, action) => {
-            state.currentItem = action.payload.item;            
-        },
-        setCheckoutCart: (state, action) => {
-            state.checkoutCart = action.payload.cart;
-        },
-        setCheckoutAmount: (state, action) => {
-            state.checkoutAmount = action.payload.amount;
-        },
-        setShopItems: (state, action) => {
-            state.shopItems = action.payload.items;
+/* Create redux slice */
+export const visitorSlice = createSlice({
+  name: "visitor",
+  initialState,
+  reducers: {
+    /* Controls the itemRemoved message */
+    setShowItemRemoved: (state, action) => {
+      state.showItemRemoved = action.payload.value;
+    },
+    /* Adds an item to the shopping cart */
+    addShoppingCart: (state, action) => {
+      for (var i = 0; i < state.shoppingCart.length; i++) {
+        if (state.shoppingCart[i]["id"] === action.payload.item["id"]) {
+          state.shoppingCart[i]["quantity"] += action.payload.item["quantity"];
+          return;
         }
+      }
 
-    }
-})
+      state.shoppingCart.push(action.payload.item);
+    },
+    /* Removes an item from the shopping cart */
+    removeShoppingCart: (state, action) => {
+      var tempCart = [...state.shoppingCart];
+      for (var i = 0; i < state.shoppingCart.length; i++) {
+        if (state.shoppingCart[i]["_id"] === action.payload.id) {
+          tempCart.pop(state.shoppingCart[i]["_id"]);
+          state.shoppingCart = tempCart;
+          return;
+        }
+      }
+    },
+    /* Resets the shopping cart to empty array */
+    resetShoppingCart: (state) => {
+      state.shoppingCart = [];
+    },
+    /* Sets the shopping cart to given value */
+    setShopItems: (state, action) => {
+      state.shopItems = action.payload.items;
+    },
+  },
+});
 
-export const {resetShoppingCart, setShowItemRemoved, addRecentlyViewed, addShoppingCart, removeShoppingCart, setCurrentItem, setCheckoutCart, setCheckoutAmount, setShopItems} = visitorSlice.actions;
+export const {
+  resetShoppingCart,
+  setShowItemRemoved,
+  addShoppingCart,
+  removeShoppingCart,
+  setShopItems,
+} = visitorSlice.actions;
 export default visitorSlice.reducer;
