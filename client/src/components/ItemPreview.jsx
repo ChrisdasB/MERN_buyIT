@@ -43,12 +43,14 @@ const ItemPreview = ({imageLink, brandName, itemName, price, description, descri
                            
                 <img className={imgLoaded ? "self-start p-2 image-active" : "self-start p-2 image-inactive"} onLoad={handleImageLoaded} loading="lazy" src={imageLink}/>
             </div>
-            <div name="item-brand" className="flex items-end justify-center mt-2"><h5 className="text-center">{brandName}</h5></div>            
-            <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-center">
-                <h5 style={{whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis"}} className="preview-item-name px-2 text-center font-bold">{itemName}</h5>
+            <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-start">
+                <h5 style={{whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis"}} className="preview-item-name px-4 font-bold">{itemName}</h5>
+            </div>          
+            <div name="item-name" style={{height:"20px", overflow: "hidden" }} className="flex items-center justify-start">
+                <h5 style={{whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis"}} className="preview-item-name px-4">{brandName}</h5>
             </div>
-            <div className="border-t my-1 border-purple-600 self-end mx-2"></div>
-            <div name="item-price" className="grid place-content-center place-items-end mb-2"><h4 className="text-lg">{price}$</h4>
+            <div className="border-t my-1 border-purple-600 self-end mx-4"></div>
+            <div name="item-price" className="grid place-content-start place-items-end mb-2"><h4 className="text-lg px-4"><small>$</small> {price}.-</h4>
             
             </div>
             

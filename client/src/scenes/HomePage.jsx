@@ -85,7 +85,7 @@ const HomePage = () => {
         :    
         
         <div className="category-page-container lg:px-10 p-0 bg-white">      
-        <Advertisement headline={"Accelarate your Work!"} info={"Coming soon!"}/>    
+        <Advertisement headline={"Accelarate your Work!"} info={"With tech from Buy IT!"}/>    
             {loading ? <div style={{ minHeight:"100vh"}} className="text-center text-lg ">
                 <h1 className="animate-pulse row-span-1 font-extrabold mt-5">Loading IT ...</h1>    
                          

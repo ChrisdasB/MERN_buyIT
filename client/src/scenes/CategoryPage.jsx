@@ -84,7 +84,7 @@ const CategoryPage= () => {
             <>
             
             <div className="category-page-container lg:px-10 p-0 bg-white">
-            <Advertisement headline={"So be IT!"} info={"Big sale comming up... sometime!"}/>
+            <Advertisement headline={"So be IT!"} info={"Some catchy, advertisement text!"}/>
             <div className="mt-10"></div>
             <SectionHeader name={location.state.sectionHeader}/>
             <div className="grid place-content-around">

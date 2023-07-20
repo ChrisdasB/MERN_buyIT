@@ -22,7 +22,7 @@ function App() {
 
   return (
     
-      <div className="container overflow-x-hidden mx-auto lg:px-20 px-0 pt-3">
+      <div className="container overflow-x-hidden mx-auto lg:px-20 px-0">
         <NavBar/>
         <Routes>
           <Route path="/" element={<HomePage />} />  

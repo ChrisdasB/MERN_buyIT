@@ -41,17 +41,17 @@ const CartItemPreview = ({handleRemoveShoppingCart, imageLink, quantity, brandNa
                 <small className="invisible h-0">Item</small>
                 <a className="color-clickable cart-item-name-link hover:scale-105 ease-in-out transition-all text-center text-sm" onClick={handleItemNavigation} target="_blank"><h1>{brandName} - {itemName}</h1></a>
             </div>
-            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs md:text-base font-bold">
+            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center  font-bold">
                 <small className="lg:invisible lg:h-0 visible h-auto">Quanitity</small>
                 <h1>{quantity} x</h1>
             </div>
-                <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs font-bold md:text-base">
+                <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center font-bold ">
                 <small className="lg:invisible lg:h-0 visible h-auto">per Piece</small>
-            <h1>{price.toFixed(2)} $</h1>
+            <h1><small>$</small> {price}.- </h1>
             </div>
-            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center text-xs font-bold md:text-base">
+            <div className="lg:h-20 h-10 col-span-1 grid place-content-center place-items-center font-bold ">
             <small className="lg:invisible lg:h-0 visible h-auto">Price</small>    
-            <h1>{(+price * +quantity).toFixed(2)} $</h1>
+            <h1><small>$</small> {(+price * +quantity)}.-</h1>
             </div>
            
         </div>

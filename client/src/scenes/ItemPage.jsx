@@ -77,7 +77,7 @@ const ItemPage = () => {
                     <h5 className="item-name-text">{location.state.itemName}</h5>
                 </div>
                 <div name="item-page-price" className="p-5 grid place-items-end">
-                <h5 className="item-price-text"><small>$</small> {location.state.price}</h5>
+                <h5 className="item-price-text"><small className="text-2xl">$</small> {location.state.price}.-</h5>
                     <h5 className="text-sm">incl. 14% VAT</h5>
                 </div>
                 <div name="item-page-quantity" className=" grid px-5 lg:grid-cols-2 grid-rows-2">
