@@ -5,12 +5,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import Items from "./models/Item.js";
-import initItems from "./INITDATA.js";
+/* import initItems from "./INITDATA.js"; */
 import { getAllItems, getCartItems } from "./controllers/items.js";
 import { validateApiKey } from "./middelware/accessAuth.js";
 import { Stripe } from "stripe";
 
-// Config
+// App and dotenv config
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -20,16 +20,13 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-// Stripe
+// Stripe Init
 const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
 // Routes
-app.get("/", validateApiKey, (req, res) => {
-  res.status(200).json({ message: "Hello World!" });
-});
-
 app.get("/items/all", validateApiKey, getAllItems);
 app.post("/items/cart", validateApiKey, getCartItems);
+/* Stripe Route */
 app.post("/create-checkout-session", validateApiKey, async (req, res) => {
   try {
     // Get Data from request body
@@ -58,7 +55,7 @@ app.post("/create-checkout-session", validateApiKey, async (req, res) => {
       res.status(404).json({ message: "Could not find items ..." });
     }
 
-    // Create session
+    // Create stripe session
     const session = await stripe.checkout.sessions.create({
       line_items: response.map((item) => {
         return {
@@ -67,13 +64,17 @@ app.post("/create-checkout-session", validateApiKey, async (req, res) => {
             product_data: {
               name: item.brandName + " - " + item.itemName,
             },
+            /* Set item price to a value in cents and add them */
             unit_amount: (item.price * 100).toFixed(0),
           },
           quantity: item.quantity,
         };
       }),
+      /* Accepted payment method: Credit Card */
       payment_method_types: ["card"],
+      /* One time payment */
       mode: "payment",
+      /* Redirect routes */
       success_url: process.env.CLIENT_URL + "/success",
       cancel_url: process.env.CLIENT_URL + "/cart",
     });
@@ -100,8 +101,5 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log("Server listening on Port: " + PORT));
-
-    /* User.insertMany(users);
-    Post.insertMany(posts); */
   })
   .catch((error) => console.log("Did not connect! " + error));
