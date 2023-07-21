@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Buy IT - Full-Stack MERN e-commerce application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a educational piece and not ment for production.
+My target on this project was, to create a technically and visually solid working application.
+I put extrem focus on the functionality of this app.
+This project is an original and was planned, designed and implemented by myself.
 
-## Available Scripts
 
-In the project directory, you can run:
+[This Project is hosted on Render.com](https://buy-it-oggx.onrender.com/)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This project is split in two main part:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Client (Frontend):
+Used Tech:
+- React.js
+- Tailwind.css
 
-### `npm test`
+Used packages:
+- react-router-dom
+- react-slick
+- redux-toolkit
+- redux-persist
+- dotenv
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The frontend contains 5 custom scenes, populated by 10 custom components.
+Even though im aware, that the data-flow is not optimal, i want to describe it anyway:
 
-### `npm run build`
+- The whole store gets fetched on the HomePage and than stored in a redux-state.
+  - The idea was, to accelerate the website, by having all needed data stored locally. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The CategoryPage is reliant on this store data and filters it locally
+- The item page is more dynamic, since i need to access it from various places
+  - It takes in a state, attached to the useNavigation hook
+- The Shopping Cart data gets stored in a seperat, local redux-state
+  - Since i use redux-persist, the cart will not get lost, even if the user leaves the site and comes back later
+- The Shopping Cart always updates the given, local data from the backend, to ensure the correct pricing is beeing displayed
+- The Shopping Cart calls the sprite-route in the backend, only offering IDs and quantitys
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Server (Backend):
+Used Tech:
+- Node.js
+- Express.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Used packages:
+- body-parser
+- cors
+- dotenv
+- helmet
+- mongoose
+- stripe
 
-### `npm run eject`
+The backend offers 3 routes, protected by an API-Key to restrict access.
+The backend is connected to a MongoDB collection.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### My Takeaway
+#### Lessons learned:
+A brief planning phase enabled me to actually build this. Even though it is, in the grand scheme of WebDev, a small App, without a plan i would get lost mid way.
+I first attempted to use MaterialUI for the frontend, but it felt a little too much for an App this size.
+I switched to Tailwind.css instead and learned the usage along the way.
+I learned a lot about error handling. To show the user the all-red error screen of React would be traumatizing i guess ...
+Because i carefully planned out my DB schmema in the beginning, the integration of stripe was pretty straight forward.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Not so good
+My data-flow on the frontend is lacking. I first thought its a great idea to have only one, big API call.
+For a static store like this, this might be ok. But on an actual store, prices and products can change every minute.
+So for an actual production-ready store, this attempt is really not the best.
+Because of the way i implemented all this, i had to ensure a solid error handling.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### What will i change next time
+- The data-flow on the frontend has to be more flexible and i need more frequent updates from the backend.
+- I would store all item realted data in the backend. In this example, i stored the images in the frontend.
+- I need to plan the design and UI more detailed before starting a project like this. Designing a lot 'on the fly' takes too much time.
